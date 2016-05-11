@@ -1,17 +1,31 @@
 {% extends "layout.jinja2" %}
 {% block body %}
-
 {% if entries %}
-<h2>Journal Entries</h2>
-<ul>
-  {% for entry in entries %}
-    <li>
-    <a href="{{ request.route_url('detail', id=entry.id) }}">{{ entry.title }}</a>
-    </li>
-  {% endfor %}
-</ul>
-{% else %}
-<p>This journal is empty</p>
-{% endif %}
-<p><a href="{{ request.route_url('action', action='create') }}">New Entry</a></p>
+<div class="container">
+  <h2>Journal Entries</h2>      
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Journal Title</th>
+        <th>Created</th>
+      </tr>
+    </thead>
+    <tbody> 
+        {% for entry in entries %}
+        <tr>
+            <td>
+            <a href="{{ request.route_url('detail', id=entry.id) }}">{{ entry.title }}</a>
+            </td>
+            <td>
+            <a href="{{ request.route_url('detail', id=entry.id) }}">{{ entry.created }}</a>
+            </td>
+        </tr>
+        {% endfor %}        
+    </tbody>
+  </table>
+  {% else %}
+    <p>This journal is empty</p>
+    {% endif %}
+    <a class="btn btn-primary" type="button" href="{{ request.route_url('action', action='create') }}">New Entry</a>
+</div>
 {% endblock %}

@@ -1,0 +1,19 @@
+{% extends "templates/layout.jinja2" %}
+
+{% block body %}
+
+    {% if entry %}
+        <div class="panel panel-default">
+          <div class="panel-heading">{{ entry.title }}</div>
+          <div class="panel-body">{{ entry.body }}</div>
+        </div>
+        <ul class="pager">
+        <li><a href="{{ request.route_url('home') }}">Go Back</a></li>
+        <li><a href="{{ request.route_url('action', action='edit',
+                _query={'id':entry.id}) }}">Edit entry</a></li>
+        </ul>
+    {% else %}
+        <p>This journal is empty</p>
+    {% endif %}
+
+{% endblock %}
